@@ -216,9 +216,10 @@ void task3()
                 variable = 2;
                 taskState = TaskStates::FAST;
             }
-
-            break;
         }
+
+        break;
+    }
 
     case TaskStates::WAIT:
     {
@@ -244,6 +245,13 @@ void task3()
 
             taskState = TaskStates::ON;
         }
+
+        break;
+    }
+    default:
+    {
+
+        break;
     }
     }
-    }
+}

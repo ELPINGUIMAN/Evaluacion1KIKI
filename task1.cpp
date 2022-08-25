@@ -26,7 +26,7 @@ void task1()
             int dataRx = Serial.read();
             if (dataRx == '1')
             {
-                Serial.print("BTN 2\n");
+                Serial.print("BTN 1\n");
                 buttonEvt.trigger = true;
                 buttonEvt.whichButton = BUTTONS::BTN_1;
             }

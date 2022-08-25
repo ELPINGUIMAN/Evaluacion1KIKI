@@ -16,8 +16,7 @@ void task2()
     static uint32_t initStableTime;
 
     const uint8_t UP_BTN_PIN = 13;
-    const uint8_t DOWN_BTN_PIN = 32;
-    const uint8_t ARM_BTN_PIN = 33;
+    const uint8_t DOWN_BTN_PIN = 12;
     const uint32_t STABLE_TIME = 100;
 
     switch (taskState)
@@ -26,7 +25,7 @@ void task2()
     {
         pinMode(UP_BTN_PIN, INPUT_PULLUP);
         pinMode(DOWN_BTN_PIN, INPUT_PULLUP);
-        pinMode(ARM_BTN_PIN, INPUT_PULLUP);
+        
 
         taskState = TaskState::WAIT_PRESS; 
         break;
@@ -43,11 +42,6 @@ void task2()
             initStableTime = millis();
             taskState = TaskState::WAIT_STABLE;
         }
-        if(digitalRead(ARM_BTN_PIN) == LOW){
-            lastButtonPressed = ARM_BTN_PIN;
-            initStableTime = millis();
-            taskState = TaskState::WAIT_STABLE;
-        }
         break;
     }
     case TaskState::WAIT_STABLE:
@@ -58,7 +52,7 @@ void task2()
         else if ( (millis() - initStableTime) > STABLE_TIME){
             if(lastButtonPressed == UP_BTN_PIN) buttonEvt.whichButton = BUTTONS::BTN_1;
             else if(lastButtonPressed == DOWN_BTN_PIN) buttonEvt.whichButton = BUTTONS::BTN_2;
-            else if(lastButtonPressed == ARM_BTN_PIN) buttonEvt.whichButton = BUTTONS::ARM_BTN;
+            
             buttonEvt.trigger = true;
             //printf("Button pressed: %d\n", lastButtonPressed);
             taskState = TaskState::WAIT_RELEASE;
